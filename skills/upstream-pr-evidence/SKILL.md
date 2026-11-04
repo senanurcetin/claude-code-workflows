@@ -8,7 +8,9 @@ description: Prepare, update or answer review on a pull request to a third-party
 The goal is a pull request a maintainer can merge without re-doing your work, and an honest record of what was and was not verified.
 
 ## 1. Before writing code
-- Find the issue. If none exists, open one or ask in an existing one whether the change is wanted. Do not open unsolicited PRs in a repository where you already have two or more open PRs.
+- Find the issue. If none exists, open one or ask in an existing one whether the change is wanted.
+- **Wait for a maintainer to agree on the scope before opening the PR.** Many projects (for example skrub and pyjanitor) state this in their contributing guide and close PRs that skipped it, even correct ones. Asking and then opening the PR straight away does not count.
+- Do not open unsolicited PRs in a repository where you already have two or more open PRs.
 - Read `CONTRIBUTING.md`, the PR template and the lint/format config (line length, tool versions).
 - Check out the exact upstream base commit and record its SHA.
 
@@ -47,5 +49,6 @@ Report only checks you actually ran. "Not run" is a valid and useful answer.
 
 ## Anti-patterns
 - Many small PRs to one repository in a short time.
+- A docs-only PR that papers over a code problem (for example documenting a wrong return type instead of fixing the dtype handling).
 - Counting open PRs as contributions.
 - Claiming a test pass from a run that crashed before collecting tests (for example a temp-directory permission error).
