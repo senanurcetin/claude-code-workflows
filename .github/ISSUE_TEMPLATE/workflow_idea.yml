@@ -1,0 +1,22 @@
+name: Workflow or skill idea
+description: Propose a skill or template based on work you have done.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: workflow
+    attributes:
+      label: The workflow
+      description: What it does and when you use it.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Links to public PRs, CI runs or logs where you used it.
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contribution
+      options:
+        - label: I would like to open the pull request myself.
