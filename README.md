@@ -9,6 +9,7 @@ How I use [Claude Code](https://claude.com/claude-code) for open-source and data
 | [`skills/upstream-pr-evidence/SKILL.md`](skills/upstream-pr-evidence/SKILL.md) | A Claude Code skill for preparing upstream PRs and answering review: red/green tests, diagnosing red CI before touching code, honest verification reports. |
 | [`templates/AGENTS.md`](templates/AGENTS.md) | Agent instructions template (project contract, commands, rules). |
 | [`templates/AI_ASSISTANCE_LOG.md`](templates/AI_ASSISTANCE_LOG.md) | Per-PR log of AI-assisted changes with verified results. |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to propose a skill, fix or template. |
 
 Install the skill for your user:
 

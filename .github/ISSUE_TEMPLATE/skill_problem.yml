@@ -1,0 +1,24 @@
+name: Skill gave wrong or unclear guidance
+description: A skill or template led to a wrong step, or its instructions were unclear.
+labels: [bug]
+body:
+  - type: input
+    id: skill
+    attributes:
+      label: Skill or template
+      placeholder: skills/upstream-pr-evidence/SKILL.md
+    validations:
+      required: true
+  - type: textarea
+    id: situation
+    attributes:
+      label: What you were doing
+      description: The task, and a link to the public PR or run if there is one.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What went wrong
+    validations:
+      required: true
