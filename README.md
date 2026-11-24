@@ -23,9 +23,9 @@ curl -fsSL https://raw.githubusercontent.com/senanurcetin/claude-code-workflows/
 
 **A small project built with Claude Code, end to end:** [offline-jsonl-workshop](https://github.com/senanurcetin/offline-jsonl-workshop) — a dependency-free UTF-8 JSONL validator. Its [AI assistance log](https://github.com/senanurcetin/offline-jsonl-workshop/blob/main/docs/AI_ASSISTANCE_LOG.md) links each Claude Code change to its PR and CI result, including one mistake (committed `.pyc` files) and its fix.
 
-**Contributions to the Claude Agent SDK** (open, under review):
+**Contributions to the Claude Agent SDK** (open, under review as of 25 November 2026):
 - [anthropics/claude-agent-sdk-python#1421](https://github.com/anthropics/claude-agent-sdk-python/pull/1421) — interpret naive transcript timestamps as UTC.
-- [anthropics/claude-agent-sdk-python#1468](https://github.com/anthropics/claude-agent-sdk-python/pull/1468) — sidechain flag parity between the disk fast path and in-memory session folding.
+- [anthropics/claude-agent-sdk-python#1490](https://github.com/anthropics/claude-agent-sdk-python/pull/1490) — preserve the first explicit sidechain flag across all session readers (replaces the closed [#1468](https://github.com/anthropics/claude-agent-sdk-python/pull/1468)).
 
 **Upstream data/ML contributions:** merged PRs to xarray, pyjanitor, scipy, Altair, DuckDB docs and plotly.py. Live list: [merged PRs outside my own repositories](https://github.com/search?q=author%3Asenanurcetin+is%3Apr+is%3Amerged+-user%3Asenanurcetin&type=pullrequests).
 
