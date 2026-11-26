@@ -5,8 +5,18 @@ import sys
 
 root = pathlib.Path(__file__).resolve().parent.parent
 errors = []
+# Claude Code loads only a file named exactly SKILL.md. Compare names with == rather than glob, which is
+# case-insensitive on Windows and macOS: skill.md or Skill.md must fail the same way on every OS.
+with_skill_md = set()
+for folder in sorted(p for p in (root / "skills").iterdir() if p.is_dir()):
+    if any(f.name == "SKILL.md" and f.is_file() for f in folder.iterdir()):
+        with_skill_md.add(folder)
+    else:
+        errors.append(f"{folder.relative_to(root).as_posix()}: missing SKILL.md")
 
 for skill in sorted(root.glob("skills/*/SKILL.md")):
+    if skill.parent not in with_skill_md:
+        continue
     text = skill.read_text(encoding="utf-8")
     match = re.match(r"---\r?\n(.*?)\r?\n---\r?\n", text, re.S)
     if not match:
