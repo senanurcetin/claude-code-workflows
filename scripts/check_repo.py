@@ -6,20 +6,26 @@ import sys
 root = pathlib.Path(__file__).resolve().parent.parent
 errors = []
 
+
+def rel(path):
+    """A path relative to the repository root, with forward slashes on every OS."""
+    return path.relative_to(root).as_posix()
+
+
 for skill in sorted(root.glob("skills/*/SKILL.md")):
     text = skill.read_text(encoding="utf-8")
     match = re.match(r"---\r?\n(.*?)\r?\n---\r?\n", text, re.S)
     if not match:
-        errors.append(f"{skill}: missing YAML frontmatter")
+        errors.append(f"{rel(skill)}: missing YAML frontmatter")
         continue
     fields = dict(
         line.split(":", 1) for line in match.group(1).splitlines() if ":" in line
     )
     fields = {k.strip(): v.strip() for k, v in fields.items()}
     if fields.get("name") != skill.parent.name:
-        errors.append(f"{skill}: name must equal folder name '{skill.parent.name}'")
+        errors.append(f"{rel(skill)}: name must equal folder name '{skill.parent.name}'")
     if not fields.get("description"):
-        errors.append(f"{skill}: description is empty")
+        errors.append(f"{rel(skill)}: description is empty")
 
 link = re.compile(r"\]\(([^)\s]+)\)")
 for md in sorted(root.rglob("*.md")):
@@ -31,7 +37,7 @@ for md in sorted(root.rglob("*.md")):
             continue
         path = target.split("#", 1)[0]
         if path and not (md.parent / path).exists():
-            errors.append(f"{md.relative_to(root)}: broken link {target}")
+            errors.append(f"{rel(md)}: broken link {target}")
 
 for err in errors:
     print(err)
