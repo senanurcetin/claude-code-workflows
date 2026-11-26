@@ -22,11 +22,30 @@ for skill in sorted(root.glob("skills/*/SKILL.md")):
         errors.append(f"{skill}: description is empty")
 
 link = re.compile(r"\]\(([^)\s]+)\)")
+fence_open = re.compile(r"(`{3,}|~{3,})")
+
+
+def outside_fences(text):
+    """The lines of a Markdown text that are not inside a fenced code block. A fence opens on a line starting
+    with three or more backticks or tildes and closes on a line starting with at least as many of the same."""
+    fence = None
+    for line in text.splitlines():
+        stripped = line.lstrip()
+        if fence is None:
+            opened = fence_open.match(stripped)
+            if opened:
+                fence = opened.group(1)
+            else:
+                yield line
+        elif stripped.startswith(fence[0] * len(fence)) and not stripped.strip(fence[0]):
+            fence = None
+
+
 for md in sorted(root.rglob("*.md")):
     # templates/ holds fill-in placeholders such as [#N](link).
     if ".git" in md.parts or "templates" in md.parts:
         continue
-    for target in link.findall(md.read_text(encoding="utf-8")):
+    for target in (t for line in outside_fences(md.read_text(encoding="utf-8")) for t in link.findall(line)):
         if re.match(r"^[a-z]+:", target) or target.startswith("#"):
             continue
         path = target.split("#", 1)[0]
